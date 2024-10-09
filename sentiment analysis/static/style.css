@@ -1,0 +1,122 @@
+/* Style the body to center everything */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #0a0838;
+}
+
+/* Ensure the container is fixed in size and centered */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px 20px;
+    background-color: #8d96fc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Flexbox for forms with fixed size */
+.forms-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Style for each form box with a fixed height */
+.form-box {
+    flex: 1;
+    min-width: 350px;
+    max-width: 500px;
+    background-color: #dbe0f0;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #f4f3f5;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 400px; /* Fixed height */
+}
+
+/* Hover effect for form boxes */
+.form-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    color: #040810;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #101a35;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Input fields styling */
+input[type="text"], input[type="file"] {
+    padding: 15px;
+    font-size: 1rem;
+    border: 2px solid #576CA8;
+    border-radius: 8px;
+    background-color: #F5F3F5;
+    color: #1b264f;
+}
+
+input[type="text"]::placeholder {
+    color: #576CA8;
+}
+
+/* Buttons styling */
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: #F5F3F5;
+    background-color: #274690;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #576CA8;
+}
+
+/* Style for form elements */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Ensure results are properly styled and the area is reserved */
+/* Ensure results are properly styled and hidden initially */
+#result, #file-result {
+    display: none; /* Hide results initially */
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #302B27; /* Darker background for results */
+    border-radius: 8px;
+    color: #F5F3F5;
+}
+
+/* Style the text inside the result areas */
+#result p, #file-result p {
+    font-size: 1.2rem;
+}

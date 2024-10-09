@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+
+        <div class="forms-container">
+            <!-- Form for single review -->
+            <div class="form-box">
+                <form id="review-form">
+                    <h2>Enter a Review:</h2>
+                    <input type="text" id="review" name="review" placeholder="Write your review here..." required>
+                    <button type="submit">Analyze</button>
+                </form>
+
+                <!-- Result for single review -->
+                <div id="result">
+                    <p>Sentiment: <span id="sentiment"></span></p>
+                </div>
+            </div>
+
+            <!-- Form for Excel file upload -->
+            <div class="form-box">
+                <h2>Upload Excel File</h2> <form id="upload-form" enctype="multipart/form-data">
+                    <input type="file" id="file" name="file" accept=".xls,.xlsx" required>
+                    <button type="submit">Upload and Analyze</button>
+                </form>
+
+                <!-- Result for file upload -->
+                <div id="file-result">
+                    <p>Positive Reviews: <span id="positive-percent"></span>%</p>
+                    <p>Negative Reviews: <span id="negative-percent"></span>%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Single review form submission
+        $(document).ready(function() {
+            $('#review-form').on('submit', function(event) {
+                event.preventDefault();
+                
+                var review = $('#review').val();
+
+                $.ajax({
+                    url: '/predict',
+                    method: 'POST',
+                 
+                  data: { review: review },
+                    success: function(response) {
+                        $('#sentiment').text(response.sentiment);
+                        $('#result').fadeIn();
+                    }
+                });
+            });
+
+            // File upload form submission
+            $('#upload-form').on('submit', function(event) {
+                event.preventDefault();
+                
+                var formData = new FormData();
+                formData.append('file', $('#file')[0].files[0]);
+
+                $.ajax({
+                    url: '/upload',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#positive-percent').text(response.positive);
+                        $('#negative-percent').text(response.negative);
+                        $('#file-result').fadeIn();
+                    },
+                    error: function(response) {
+                        alert("Error: " + response.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
